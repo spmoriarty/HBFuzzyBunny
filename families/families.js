@@ -9,38 +9,40 @@ logoutButton.addEventListener('click', () => {
     logout();
 });
 
-async function displayFamilies(families) {
-    displayFamilies() = '',
+export async function displayFamilies() {
+    familiesEl.textContent = '';
     const families = await getFamilies();
 
 
     for (let family of families) {
-
-        const familiesEl = document.createElement('div');
-        div.classList.add('family');
+        const familyEl = document.createElement('div');
         
-        const familyEl = document.createElement('h2');
-        h2.textContent = loving_families.name;
-
-        const bunnyEl = document.createElement('h3');
-        bunnyEl.textContent = fuzzy_bunny.name;
+        familyEl.classList.add = ('family');
+        const nameEl = document.createElement('h3');
+        nameEl.textContent = family.name;
         
-        const bunniesEl = document.createElement('div');
-        div.classList.add('bunny');
+        const bunnyEl = document.createElement('div');
+        bunnyEl.classList.add = ('bunnies');
 
-        bunniesEl.append(bunnyEl);
-        familiesEl.append(bunniesEl, familyEl);
+    
+
+        for (let bunny of family.fuzzy_bunnies) {
+
+            const bunniesEl = document.createElement('div');
+            bunniesEl.classList.add('bunny');
+            bunniesEl.textContent = bunny.name;
+            bunniesEl.addEventListener('click', async () => {
+                await deleteBunny(bunny.id);
+                await displayFamilies();
+            });
+            bunnyEl.append(bunniesEl);
+        }
+        familyEl.append(bunnyEl, nameEl);
+        familiesEl.append(familyEl);
+        
     }
         
-        bunnyEl.addEventListener( 'click' () => {
-            deleteBunny(id.id);
-            displayFamilies();
-        });
 
-    }
-
-    // append the bunniesEl and nameEl to the familyEl
-
-    // append the familyEl to the familiesEl
 }
+
 displayFamilies();
