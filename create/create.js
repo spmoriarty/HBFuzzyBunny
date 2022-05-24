@@ -3,7 +3,7 @@ import {
     getFamilies, 
     checkAuth, 
     logout, 
-    deleteBunny
+    
 } from '../fetch-utils.js';
 
 
@@ -35,7 +35,7 @@ window.addEventListener('load', async () => {
     for (let bunny of family) {
         const option = document.createElement('option');
         option.textContent = `${bunny.name}`;
-      option.value = bunny.id;
+        option.value = bunny.id;
         select.append(option);
     }
 
