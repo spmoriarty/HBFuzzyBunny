@@ -11,12 +11,6 @@ export function getUser() {
 export async function getFamilies() {
     const response = await client.from('loving_families').select('*, fuzzy_bunnies(*)');
     // fetch all families and their bunnies
-    if (response.error) {
-        console.error(response.error.message);
-    } else {
-        return response.data;
-    }
-    return checkError(response);
 }
 
 export async function deleteBunny(id) {
@@ -31,11 +25,7 @@ export async function deleteBunny(id) {
 export async function createBunny(bunny) {
     // create a bunny using the bunny argument
     const response = await client.from('fuzzy_bunnies').insert(bunny);
-    if (response.error) {
-        console.error(response.error.message);
-    } else {
-        return response.data;
-    }
+    
 }
 
 
@@ -71,6 +61,4 @@ export async function logout() {
     return (window.location.href = '../');
 }
 
-function checkError({ data, error }) {
-    return error ? console.error(error) : data;
-}
+
