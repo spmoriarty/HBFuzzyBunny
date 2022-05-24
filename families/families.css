@@ -1,0 +1,38 @@
+.families-container {
+    width: 80%;
+    min-width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.family {
+    width: 200px;
+    margin: 10px;
+    border: solid 1px black;
+    padding: 10px;
+}
+
+.family h3 {
+    margin: 0;
+}
+
+.bunnies {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bunny {
+    margin: 3px;
+    padding: 3px;
+    border: dotted 2px magenta;
+    cursor: pointer;
+}
+
+.bunny-form {
+    font-size: 1.5rem;
+    text-align: right;
+}
+
+.bunny-form label {
+    display: block;
