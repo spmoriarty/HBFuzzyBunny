@@ -11,18 +11,18 @@ export function getUser() {
 export async function getFamilies() {
     const response = await client.from('loving_families').select('*, fuzzy_bunnies(*)');
     // fetch all families and their bunnies
-    return response;
+    return response.data;
 }
 
 export async function deleteBunny(id) {
     const response = await client.from('fuzzy_bunnies').delete().eq('id', id);
-    return response;
+    return response.data;
 }
 
 export async function createBunny(bunny) {
     // create a bunny using the bunny argument
     const response = await client.from('fuzzy_bunnies').insert(bunny);
-    return response;
+    return response.data;
     
 }
 
