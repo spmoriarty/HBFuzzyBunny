@@ -1,6 +1,6 @@
 // Create your own supabase database using the provided seeds.sql file
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://xsjxkslcnzexkeuqopsq.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhzanhrc2xjbnpleGtldXFvcHNxIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTIyOTI0MzIsImV4cCI6MTk2Nzg2ODQzMn0.6PW-I5jDnoqhgO6Egpvc5fEpprJ1jHfmAODRlCynp2I';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -9,22 +9,23 @@ export function getUser() {
 }
 
 export async function getFamilies() {
+    const response = await client.from('loving_families').select('*, fuzzy_bunnies(*)');
     // fetch all families and their bunnies
-
-    return checkError(response);
+    return response.data;
 }
 
 export async function deleteBunny(id) {
-    // delete a single bunny using the id argument
-
-    return checkError(response);
+    const response = await client.from('fuzzy_bunnies').delete().eq('id', id);
+    return response.data;
 }
 
 export async function createBunny(bunny) {
     // create a bunny using the bunny argument
-
-    return checkError(response);
+    const response = await client.from('fuzzy_bunnies').insert(bunny);
+    return response.data;
+    
 }
+
 
 // MARTHA STEWART (PRE-MADE) FUNCTIONS
 
@@ -58,6 +59,4 @@ export async function logout() {
     return (window.location.href = '../');
 }
 
-function checkError({ data, error }) {
-    return error ? console.error(error) : data;
-}
+

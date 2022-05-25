@@ -2,28 +2,45 @@ import {
     createBunny, 
     getFamilies, 
     checkAuth, 
-    logout 
+    logout, 
+    
 } from '../fetch-utils.js';
+
 
 const form = document.querySelector('.bunny-form');
 const logoutButton = document.getElementById('logout');
 
 form.addEventListener('submit', async e => {
-    // prevent default
+    e.preventDefault();
+    const formData = new FormData(form);
+    const familyId = formData.get('family-id');
+    const name = formData.get('bunny-name');
+    await createBunny({ name: name, family_id: familyId });
 
-    // get the name and family id from the form
-
-    // use createBunny to create a bunny with this name and family id
-    
     form.reset();
 });
 
-window.addEventListener('load', async() => {
+window.addEventListener('load', async () => {
     // let's dynamically fill in the families dropdown from supabase
+    
     // grab the select HTML element from the DOM
-
+    const familyId = document.getElementsByName('family-id');
+    familyId.textContent = '';
     // go get the families from supabase
+    const family = await getFamilies();
+        
 
+    const select = document.querySelector('select');
+
+    for (let bunny of family) {
+        const option = document.createElement('option');
+        option.textContent = `${bunny.name}`;
+        option.value = bunny.id;
+        select.append(option);
+    }
+
+
+}
     // for each family
 
     // create an option tag
@@ -31,7 +48,7 @@ window.addEventListener('load', async() => {
     // set the option's value and text content
 
     // and append the option to the select
-});
+);
 
 
 checkAuth();
